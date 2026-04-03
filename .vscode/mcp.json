@@ -1,0 +1,36 @@
+{
+	"servers": {
+	    "MA-API": {
+      		"command": "python3",
+      		"args": ["ma_mcp.py"]
+	    },
+		"OpenAPI MCP Server": {
+			"command": "uvx",
+			"args": [
+				"--with", "fastmcp<3",
+				"awslabs.openapi-mcp-server@latest",
+				"--auth-type", "bearer",
+				"--auth-token", "${input:apiToken}"
+			],
+			"env": {
+				"API_NAME": "Machine Accounting",
+				"API_BASE_URL": "http://localhost:5294/",
+				"API_SPEC_URL": "http://localhost:5294/swagger/v1/swagger.json",
+				"LOG_LEVEL": "ERROR",
+				"ENABLE_PROMETHEUS": "false",
+				"ENABLE_OPERATION_PROMPTS": "true",
+				"UVICORN_TIMEOUT_GRACEFUL_SHUTDOWN": "5.0",
+				"UVICORN_GRACEFUL_SHUTDOWN": "true"
+			},
+			"type": "stdio"
+		}
+	},
+	"inputs": [
+		{
+			"id": "apiToken",
+			"type": "promptString",
+			"description": "Bearer token for Machine Accounting API (get from POST /api/v1/dev/auth/token/full_access)",
+			"password": true
+		}
+	]
+}

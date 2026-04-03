@@ -1,0 +1,10 @@
+{
+    "mssql.connections": [
+        
+    ],
+    "chat.tools.terminal.autoApprove": {
+        "podman": true,
+        "ConvertFrom-Json": true,
+        "ForEach-Object": true
+    }
+}
